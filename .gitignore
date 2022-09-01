@@ -23,6 +23,6 @@
 hs_err_pid*
 
 # IntelliJ files
-*.iws
-workspace.xml
-tasks.xml
+out/
+target/
+.idea/
