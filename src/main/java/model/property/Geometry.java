@@ -1,12 +1,13 @@
 package model.property;
 
-import model.property.Coordinates;
+
+import java.util.List;
 
 public class Geometry {
     private final String type;
-    private final Coordinates coordinates;
+    private final List<Float> coordinates;
 
-    public Geometry(String type, Coordinates coordinates) {
+    public Geometry(String type, List<Float> coordinates) {
         this.type = type;
         this.coordinates = coordinates;
     }
@@ -15,7 +16,7 @@ public class Geometry {
         return type;
     }
 
-    public Coordinates getCoordinates() {
+    public List<Float> getCoordinates() {
         return coordinates;
     }
 }

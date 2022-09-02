@@ -1,15 +1,16 @@
 package model;
 
-import model.property.Bbox;
 import model.property.Features;
 import model.property.Metadata;
 
+import java.util.List;
+
 public class Earthquake {
     private final Metadata metadata;
-    private final Features[] features;
-    private final Bbox bbox;
+    private final List<Features> features;
+    private final List<Float> bbox;
 
-    public Earthquake(Metadata metadata, Features[] features, Bbox bbox) {
+    public Earthquake(Metadata metadata, List<Features> features, List<Float> bbox) {
         this.metadata = metadata;
         this.features = features;
         this.bbox = bbox;
@@ -19,11 +20,11 @@ public class Earthquake {
         return metadata;
     }
 
-    public Features[] getFeatures() {
+    public List<Features> getFeatures() {
         return features;
     }
 
-    public Bbox getBbox() {
+    public List<Float> getBbox() {
         return bbox;
     }
 }
