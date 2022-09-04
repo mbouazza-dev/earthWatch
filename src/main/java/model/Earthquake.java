@@ -27,4 +27,13 @@ public class Earthquake {
     public List<Float> getBbox() {
         return bbox;
     }
+
+    @Override
+    public String toString() {
+        return "{\"Earthquake\":{"
+                + "\"metadata\":" + metadata
+                + ", \"features\":" + features
+                + ", \"bbox\":" + bbox
+                + "}}";
+    }
 }

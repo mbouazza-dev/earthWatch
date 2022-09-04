@@ -40,4 +40,16 @@ public class Metadata {
     public int getStatus() {
         return status;
     }
+
+    @Override
+    public String toString() {
+        return "{\"Metadata\":{"
+                + "\"generated\":\"" + generated + "\""
+                + ", \"url\":\"" + url + "\""
+                + ", \"title\":\"" + title + "\""
+                + ", \"api\":\"" + api + "\""
+                + ", \"count\":\"" + count + "\""
+                + ", \"status\":\"" + status + "\""
+                + "}}";
+    }
 }

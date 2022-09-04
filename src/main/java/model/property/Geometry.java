@@ -19,4 +19,12 @@ public class Geometry {
     public List<Float> getCoordinates() {
         return coordinates;
     }
+
+    @Override
+    public String toString() {
+        return "{\"Geometry\":{"
+                + "\"type\":\"" + type + "\""
+                + ", \"coordinates\":" + coordinates
+                + "}}";
+    }
 }

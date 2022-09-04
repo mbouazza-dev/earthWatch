@@ -28,4 +28,14 @@ public class Features {
     public String getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "{\"Features\":{"
+                + "\"type\":\"" + type + "\""
+                + ", \"properties\":" + properties
+                + ", \"geometry\":" + geometry
+                + ", \"id\":\"" + id + "\""
+                + "}}";
+    }
 }

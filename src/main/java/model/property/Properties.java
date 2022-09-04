@@ -154,4 +154,35 @@ public class Properties {
     public String getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "{\"Properties\":{"
+                + "\"mag\":\"" + mag + "\""
+                + ", \"place\":\"" + place + "\""
+                + ", \"time\":\"" + time + "\""
+                + ", \"updated\":\"" + updated + "\""
+                + ", \"tz\":\"" + tz + "\""
+                + ", \"url\":\"" + url + "\""
+                + ", \"detail\":\"" + detail + "\""
+                + ", \"felt\":\"" + felt + "\""
+                + ", \"cdi\":\"" + cdi + "\""
+                + ", \"mmi\":\"" + mmi + "\""
+                + ", \"alert\":\"" + alert + "\""
+                + ", \"status\":\"" + status + "\""
+                + ", \"tsunami\":\"" + tsunami + "\""
+                + ", \"sig\":\"" + sig + "\""
+                + ", \"net\":\"" + net + "\""
+                + ", \"code\":\"" + code + "\""
+                + ", \"ids\":\"" + ids + "\""
+                + ", \"sources\":\"" + sources + "\""
+                + ", \"types\":\"" + types + "\""
+                + ", \"nst\":\"" + nst + "\""
+                + ", \"dmin\":\"" + dmin + "\""
+                + ", \"rms\":\"" + rms + "\""
+                + ", \"gap\":\"" + gap + "\""
+                + ", \"magType\":\"" + magType + "\""
+                + ", \"type\":\"" + type + "\""
+                + "}}";
+    }
 }
