@@ -157,8 +157,7 @@ public class Properties {
 
     @Override
     public String toString() {
-        return "{\"Properties\":{"
-                + "\"mag\":\"" + mag + "\""
+        return "{\"mag\":\"" + mag + "\""
                 + ", \"place\":\"" + place + "\""
                 + ", \"time\":\"" + time + "\""
                 + ", \"updated\":\"" + updated + "\""
@@ -183,6 +182,6 @@ public class Properties {
                 + ", \"gap\":\"" + gap + "\""
                 + ", \"magType\":\"" + magType + "\""
                 + ", \"type\":\"" + type + "\""
-                + "}}";
+                + "}";
     }
 }

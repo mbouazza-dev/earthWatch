@@ -43,13 +43,12 @@ public class Metadata {
 
     @Override
     public String toString() {
-        return "{\"Metadata\":{"
-                + "\"generated\":\"" + generated + "\""
+        return "{\"generated\":\"" + generated + "\""
                 + ", \"url\":\"" + url + "\""
                 + ", \"title\":\"" + title + "\""
                 + ", \"api\":\"" + api + "\""
                 + ", \"count\":\"" + count + "\""
                 + ", \"status\":\"" + status + "\""
-                + "}}";
+                + "}";
     }
 }

@@ -76,7 +76,7 @@ public class Producer implements Runnable {
                      * wait before sending next message. this has been done on
                      * purpose
                      */
-                    Thread.sleep(3600000);
+                    Thread.sleep(900000);
 
             }
         } catch (Exception e) {

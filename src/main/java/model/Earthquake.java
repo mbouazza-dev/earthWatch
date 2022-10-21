@@ -3,7 +3,9 @@ package model;
 import model.property.Features;
 import model.property.Metadata;
 
-import java.util.List;
+import java.util.*;
+
+import org.apache.commons.lang.ArrayUtils;
 
 public class Earthquake {
     private final Metadata metadata;
@@ -30,10 +32,11 @@ public class Earthquake {
 
     @Override
     public String toString() {
-        return "{\"Earthquake\":{"
-                + "\"metadata\":" + metadata
-                + ", \"features\":" + features
+        return "{\"type"+'"'+':'+'"'+"FeatureCollection\""
+                + ", \"metadata\":" + metadata
                 + ", \"bbox\":" + bbox
-                + "}}";
+                + ", \"features\":" + features
+                + ", \"max_mag\":" + '"' + features.stream().map(x -> x.getProperties().getMag()).max(Float::compare).get() + '"'
+                + "}";
     }
 }

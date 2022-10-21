@@ -22,9 +22,8 @@ public class Geometry {
 
     @Override
     public String toString() {
-        return "{\"Geometry\":{"
-                + "\"type\":\"" + type + "\""
+        return "{\"type\":\"" + type + "\""
                 + ", \"coordinates\":" + coordinates
-                + "}}";
+                + "}";
     }
 }
