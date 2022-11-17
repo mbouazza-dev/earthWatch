@@ -1,0 +1,23 @@
+# config file version
+apiVersion: 1
+
+# list of datasources to insert/update depending
+# whats available in the database
+datasources:
+  # <string, required> name of the datasource. Required
+- name: InfluxDB_v2_Flux
+  # <string, required> datasource type. Required
+  type: influxdb
+  # <string, required> access mode. direct or proxy. Required
+  access: proxy
+  # <string> url
+  url: http://influxdb:8086
+  isDefault: true
+  # <string> database password, if used
+  secureJsonData:
+    token: 60b42f6f12a91425b4fc02d1dd4e44eff9231f737171da79a993055c3aa367ab
+  jsonData:
+    version: Flux
+    organization: earthWatch
+    defaultBucket: telegraf
+    tlsSkipVerify: true

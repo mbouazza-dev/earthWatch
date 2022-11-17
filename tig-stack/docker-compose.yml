@@ -1,0 +1,108 @@
+version: "3"
+
+services:
+  zookeeper:
+    image: "bitnami/zookeeper:latest"
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+
+  kafka:
+    image: confluentinc/cp-kafka:6.1.1
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - '9092:9092'
+    expose:
+      - '29092'
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: '1'
+      KAFKA_MIN_INSYNC_REPLICAS: '1'
+      KAFKA_CLUSTER_ENV_VAR_NAME: 'KAFKA_CLUSTER'
+
+
+  init-kafka:
+    image: confluentinc/cp-kafka:6.1.1
+    container_name: init-kafka
+    depends_on:
+      - kafka
+    entrypoint: [ '/bin/sh', '-c' ]
+    command: |
+      "
+      # blocks until kafka is reachable
+      kafka-topics --bootstrap-server kafka:29092 --list
+
+      echo -e 'Creating kafka topics'
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic general-events --replication-factor 1 --partitions 1
+
+      echo -e 'Successfully created the following topics:'
+      kafka-topics --bootstrap-server kafka:29092 --list
+
+      kafka-console-consumer --topic general-events --from-beginning --bootstrap-server kafka:29092
+      "
+    
+  influxdb:
+    image: influxdb
+    container_name: influxdb
+    hostname: influxdb
+    volumes:
+      - influxdb-storage:/var/lib/influxdb2:rw
+    env_file:
+      - .env
+    entrypoint: ["./entrypoint.sh"]
+    ports:
+      - ${DOCKER_INFLUXDB_INIT_PORT}:8086
+
+  telegraf:
+    image: telegraf
+    depends_on:
+      - influxdb
+      - kafka
+    container_name: telegraf
+    links:
+      - influxdb
+    restart: on-failure
+    env_file:
+      - .env
+    environment: 
+      - DOCKER_INFLUXDB_INIT_ORG=earthWatch
+      - DOCKER_INFLUXDB_INIT_BUCKET=telegraf
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=60b42f6f12a91425b4fc02d1dd4e44eff9231f737171da79a993055c3aa367ab
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:rw
+  
+  grafana:
+    image: grafana/grafana-oss:9.2.0
+    depends_on:
+      - influxdb
+    env_file:
+      - .env
+    links:
+      - influxdb
+    container_name: grafana
+    ports:
+      - ${GRAFANA_PORT}:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+      - ./grafana/dashboards/:/var/lib/grafana/dashboards/
+
+  java:
+    image: openjdk:15
+    depends_on:
+      - init-kafka
+    container_name: data-source
+    volumes:
+      - ./earthWatch.jar:/usr/src/java 
+    command: bash -c "java -jar /usr/src/java earthWatch.jar"
+
+volumes:
+  grafana_data:
+  influxdb-storage:

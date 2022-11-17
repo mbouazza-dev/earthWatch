@@ -5,8 +5,6 @@ import model.property.Metadata;
 
 import java.util.*;
 
-import org.apache.commons.lang.ArrayUtils;
-
 public class Earthquake {
     private final Metadata metadata;
     private final List<Features> features;
@@ -36,7 +34,6 @@ public class Earthquake {
                 + ", \"metadata\":" + metadata
                 + ", \"bbox\":" + bbox
                 + ", \"features\":" + features
-                + ", \"max_mag\":" + '"' + features.stream().map(x -> x.getProperties().getMag()).max(Float::compare).get() + '"'
                 + "}";
     }
 }
