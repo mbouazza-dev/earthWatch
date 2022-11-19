@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -166,7 +165,10 @@
         "rgba(237, 129, 40, 0.89)",
         "#F2495C"
       ],
-      "datasource": {},
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P5697886F9CA74929"
+      },
       "format": "none",
       "gauge": {
         "maxValue": 10,
@@ -216,25 +218,20 @@
         "lineColor": "rgb(31, 120, 193)",
         "show": false
       },
-      "tableColumn": "",
+      "tableColumn": "_value {_start=\"2022-11-18 09:59:36.52 +0000 UTC\", _stop=\"2022-11-18 10:59:36.52 +0000 UTC\", host=\"35e05b738ad8\"}",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
             "uid": "ZmJz1N7Vz"
           },
-          "query": "from(bucket: \"telegraf\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"earthWatch-jppytdv\")\n  |> filter(fn: (r) => r[\"_field\"] == \"max_mag\")",
+          "query": "from(bucket: \"telegraf\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"earthWatch-jppytdv\")\n  |> filter(fn: (r) => r[\"_field\"] == \"properties_mag\")\n  |> group(columns: [\"host\", \"_measurement\"], mode:\"by\")\n  |> max()",
           "refId": "A"
         }
       ],
       "thresholds": "2,5",
       "title": "Max Magnitude",
-      "transformations": [
-        {
-          "id": "merge",
-          "options": {}
-        }
-      ],
+      "transformations": [],
       "type": "grafana-singlestat-panel",
       "valueFontSize": "120%",
       "valueMaps": [
@@ -307,14 +304,14 @@
         "lineColor": "rgb(31, 120, 193)",
         "show": false
       },
-      "tableColumn": "_value {_start=\"2022-11-13 09:52:45.638 +0000 UTC\", _stop=\"2022-11-13 10:52:45.638 +0000 UTC\", host=\"a732ddb440d0\"}",
+      "tableColumn": "_value {_start=\"2022-11-18 10:00:09.517 +0000 UTC\", _stop=\"2022-11-18 11:00:09.517 +0000 UTC\", host=\"35e05b738ad8\"}",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
             "uid": "ZmJz1N7Vz"
           },
-          "query": "from(bucket: \"telegraf\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"earthWatch-jppytdv\")\n  |> filter(fn: (r) => r[\"_field\"] == \"count\")\n  |> group(columns: [\"host\", \"_measurement\"], mode:\"by\")\n  |> last()",
+          "query": "from(bucket: \"telegraf\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"earthWatch-jppytdv\")\n  |> filter(fn: (r) => r[\"_field\"] == \"count\")\n  |> group(columns: [\"host\", \"_measurement\"], mode:\"by\")",
           "refId": "A"
         }
       ],
@@ -322,12 +319,24 @@
       "title": "Total earthquake during period",
       "transformations": [
         {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "_value"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
           "id": "reduce",
           "options": {
             "includeTimeField": false,
             "mode": "reduceFields",
             "reducers": [
-              "lastNotNull"
+              "sum"
             ]
           }
         }
