@@ -1,4 +1,4 @@
-[<img src="https://previews.123rf.com/images/findriyani/findriyani2007/findriyani200700185/153207836-earthquake-disaster-logo-vector-template.jpg" alt="EarthQuake logo" align="right"/>](https://previews.123rf.com/images/findriyani/findriyani2007/findriyani200700185/153207836-earthquake-disaster-logo-vector-template.jpg)
+[<img src="https://previews.123rf.com/images/findriyani/findriyani2007/findriyani200700185/153207836-earthquake-disaster-logo-vector-template.jpg" alt="EarthQuake logo" align="right" width="60" height="50"/>](https://previews.123rf.com/images/findriyani/findriyani2007/findriyani200700185/153207836-earthquake-disaster-logo-vector-template.jpg)
 
 # Earthwatch
 
@@ -9,7 +9,7 @@ collection. Just pull .
 
 ## Dashboards
 
-[![earthWatch - Monitoring Dashboard](https://github.com/mbouazza-dev/earthWatch/image/dashboard.png)](https://github.com/mbouazza-dev/earthWatch/image/dashboard.png)
+[![earthWatch - Monitoring Dashboard](https://github.com/mbouazza-dev/earthWatch/blob/main/image/dashboard.png)](https://github.com/mbouazza-dev/earthWatch/blob/main/image/dashboard.png)
 
 ## Installation
 
