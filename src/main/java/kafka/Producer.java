@@ -59,7 +59,7 @@ public class Producer implements Runnable {
         try {
             while (true) {
 
-                Earthquake e = Deserialize.deserialize(ApiCall.get("https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime="+java.time.LocalDate.now()+"T"+java.time.LocalTime.now().minusHours(3).format(DateTimeFormatter.ofPattern("HH:mm:ss"))));
+                Earthquake e = Deserialize.deserialize(ApiCall.get("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"));
                 record = new ProducerRecord<Long, String>(TOPIC_NAME, e.getMetadata().getGenerated(), e.toString());
                     kafkaProducer.send(record, new Callback() {
                         @Override

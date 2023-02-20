@@ -555,7 +555,7 @@
           "refId": "A"
         }
       ],
-      "title": "Earthquakes count evolution (30min interval)",
+      "title": "Earthquakes count evolution (15min interval)",
       "transformations": [
         {
           "id": "merge",

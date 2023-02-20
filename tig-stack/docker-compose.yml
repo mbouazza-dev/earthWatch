@@ -97,7 +97,7 @@ services:
   java:
     image: openjdk:15
     depends_on:
-      - init-kafka
+      - grafana
     container_name: data-source
     volumes:
       - ./earthWatch.jar:/usr/src/java 
